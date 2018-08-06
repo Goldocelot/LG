@@ -7,29 +7,32 @@ import org.bukkit.inventory.ItemStack;
 
 import be.goldocelot.lg.utils.ArmorContents;
 
-public class Role {
+public class Role{
 
-	private int vie;
-	private ArrayList<Player> contents;
+	private int health;
+	private ArrayList<Player> players;
 	private ArrayList<ItemStack> stuff;
+	private ArrayList<Player> team;
 	
-	public Role(ArrayList<Player> contents, ArrayList<ItemStack> stuff, int vie) {
-		this.vie = 20;
-		this.contents = contents;
+	public Role(ArrayList<Player> players, ArrayList<ItemStack> stuff, int vie, ArrayList<Player> team) {
+		this.health = 20;
+		this.players = players;
 		this.stuff = stuff;
+		this.team = team;
 	}
 	
 	public void addPlayer(Player p) {
-		this.contents.add(p);
+		this.players.add(p);
 	}
 	
 	public void removePlayer(Player p) {
-		this.contents.remove(p);
+		this.players.remove(p);
 	}
 	
 	public void setupPlayers() {
-		for(Player role : this.contents) {
-			role.setMaxHealth(vie);
+		for(Player role : this.players) {
+			role.setMaxHealth(this.health);
+			this.team.add(role);
 			for(ItemStack itemStack : this.stuff) {
 				ArmorContents item = new ArmorContents(itemStack);
 				if(item.isHelmet()) {
