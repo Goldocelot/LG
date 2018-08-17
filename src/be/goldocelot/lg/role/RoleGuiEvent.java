@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -54,6 +56,10 @@ public class RoleGuiEvent implements Listener {
 				config.set("Role.Voleur", false);
 			}else if(item.equals(new ItemStackCreator("Voleur", 1, Material.STAINED_CLAY, (byte) 14).create())) {
 				config.set("Role.Voleur", true);
+			}else if(item.equals(new ItemStackCreator("Chasseur", 1, Material.STAINED_CLAY, (byte) 5).create())) {
+				config.set("Role.Chasseur", false);
+			}else if(item.equals(new ItemStackCreator("Chasseur", 1, Material.STAINED_CLAY, (byte) 14).create())) {
+				config.set("Role.Chasseur", true);
 			}else if(item.equals(new ItemStackCreator("Simples Villageois", config.getInt("Role.Simples Villageois"), Material.STAINED_CLAY, (byte) 0).create())) {
 				e.setCancelled(true);
 				p.closeInventory();
@@ -157,6 +163,34 @@ public class RoleGuiEvent implements Listener {
 			 	io.printStackTrace();
 			}
 			rManager.sendLGGUI(p);
+		}
+	}
+	
+	@EventHandler
+	private void onOpen(InventoryOpenEvent e) {
+		Inventory i = e.getInventory();
+		YamlConfiguration config = rConfig.getNewConfiguration();
+		if(i.getName().equals("§9 Menu des rôles")) {
+			config.set("Role.Automatique", false);
+			try {
+				config.save(rConfig.getFile());
+			} catch (IOException io) {
+			 	io.printStackTrace();
+			}
+		}
+	}
+	
+	@EventHandler
+	private void onClose(InventoryCloseEvent e) {
+		Inventory i = e.getInventory();
+		YamlConfiguration config = rConfig.getNewConfiguration();
+		if(i.getName().equals("§9 Menu des rôles")) {
+			config.set("Role.Automatique", true);
+			try {
+				config.save(rConfig.getFile());
+			} catch (IOException io) {
+			 	io.printStackTrace();
+			}
 		}
 	}
 }

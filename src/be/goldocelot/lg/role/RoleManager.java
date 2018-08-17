@@ -27,7 +27,11 @@ public class RoleManager {
 		roleGui.setItem(1, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
 		roleGui.setItem(2, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
 		roleGui.setItem(3, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
-		roleGui.setItem(4, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
+		if(config.getBoolean("Role.Chasseur")) {
+			roleGui.setItem(4, new ItemStackCreator("Chasseur", 1, Material.STAINED_CLAY, (byte) 5).create());
+		}else {
+			roleGui.setItem(4, new ItemStackCreator("Chasseur", 1, Material.STAINED_CLAY, (byte) 14).create());
+		}
 		roleGui.setItem(5, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
 		roleGui.setItem(6, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
 		roleGui.setItem(7, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
@@ -71,6 +75,7 @@ public class RoleManager {
 		if(config.getBoolean("Role.Voleur")) {
 			int a = 1;
 			if(config.getBoolean("Role.Voyante")) a++;
+			if(config.getBoolean("Role.Chasseur")) a++;
 			if(config.getBoolean("Role.Sorcière")) a++;
 			if(config.getBoolean("Role.Petite fille")) a++;
 			if(config.getBoolean("Role.Cupidon")) a++;
@@ -86,6 +91,7 @@ public class RoleManager {
 			int a = 0;
 			if(config.getBoolean("Role.Voyante")) a++;
 			if(config.getBoolean("Role.Sorcière")) a++;
+			if(config.getBoolean("Role.Chasseur")) a++;
 			if(config.getBoolean("Role.Petite fille")) a++;
 			if(config.getBoolean("Role.Cupidon")) a++;
 			a = a+config.getInt("Role.Loups-Garous");
