@@ -1,6 +1,8 @@
 package be.goldocelot.lg.role;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,7 +21,7 @@ public class RoleManager {
 	}
 	
 	private Inventory createRoleGui() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = this.rConfig.getNewConfiguration();
 		if(config.getInt("Role.Simples Villageois") < 0) config.set("Role.Simples Villageois", 0);
 		if(config.getInt("Role.Loups-Garous") < 1) config.set("Role.Loups-Garous", 1);
 		Inventory roleGui = Bukkit.createInventory(null, 27, "§9 Menu des rôles");
@@ -113,7 +115,7 @@ public class RoleManager {
 	}
 	
 	private Inventory createSVGui() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = this.rConfig.getNewConfiguration();
 		Inventory svGui = Bukkit.createInventory(null, 27, "§9 Menu des simples villageois");
 		svGui.setItem(0, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
 		svGui.setItem(1, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
@@ -150,7 +152,7 @@ public class RoleManager {
 	}
 	
 	private Inventory createLGGUI() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = this.rConfig.getNewConfiguration();
 		Inventory lgGui = Bukkit.createInventory(null, 27, "§9 Menu des loups-garous");
 		lgGui.setItem(0, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
 		lgGui.setItem(1, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
@@ -196,5 +198,47 @@ public class RoleManager {
 	
 	public void sendLGGUI(Player p) {
 		p.openInventory(this.createLGGUI());
+	}
+	
+	public void randomiser() {
+		YamlConfiguration config = this.rConfig.getNewConfiguration();
+		List<String> rRole = new ArrayList<String>();
+		if(config.getBoolean("Role.Sorcière")) rRole.add("Sorcière");
+		if(config.getBoolean("Role.Voyante")) rRole.add("Voyante");
+		if(config.getBoolean("Role.Cupidon")) rRole.add("Cupidon");
+		if(config.getBoolean("Role.Petite fille")) rRole.add("Petite fille");
+		if(config.getBoolean("Role.Voleur")) rRole.add("Voleur");
+		if(config.getBoolean("Role.Chasseur")) rRole.add("Chasseur");
+		int a = 0;
+		while(a < config.getInt("Role.Simples Villageois")) {
+			a++;
+			rRole.add("Simple Villageois");
+		}
+		a = 0;
+		while(a < config.getInt("Role.Loups-Garous")) {
+			a++;
+			rRole.add("Loup-Garou");
+		}
+		if(config.getBoolean("Role.Voleur")) {
+			int y = 0;
+			while(y<2) {
+				double z = Math.random()*(rRole.size()-1);
+				int x = (int) Math.round(z);
+				y++;
+				config.set("Voleur."+y, rRole.get(x));
+				rRole.remove(x);
+			}			
+		}
+		for(Player onGame : Bukkit.getOnlinePlayers()) {
+			double z = Math.random()*(rRole.size()-1);
+			int x = (int) Math.round(z);
+			config.set("Player."+onGame.getName(), rRole.get(x));
+			rRole.remove(x);
+			try {
+				config.save(rConfig.getFile());
+			} catch (IOException io) {
+			 	io.printStackTrace();
+			}
+		}
 	}
 }

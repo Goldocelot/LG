@@ -73,7 +73,7 @@ public class RoleGuiEvent implements Listener {
 			}else if(item.equals(new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create())){
 				e.setCancelled(true);
 				p.closeInventory();
-				//start
+				rManager.randomiser();
 				return;
 			}else if(item.getType().equals(Material.STONE)) {
 				e.setCancelled(true);
