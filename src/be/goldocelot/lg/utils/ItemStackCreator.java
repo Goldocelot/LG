@@ -23,12 +23,14 @@ public class ItemStackCreator {
 			ItemStack item = new ItemStack(this.mat, this.nbr);
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(this.name);
+			meta.spigot().setUnbreakable(true);
 			item.setItemMeta(meta);
 			return item;
 		}else {
 			ItemStack item = new ItemStack(this.mat, this.nbr, this.b);
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(this.name);
+			meta.spigot().setUnbreakable(true);
 			item.setItemMeta(meta);
 			return item;
 		}

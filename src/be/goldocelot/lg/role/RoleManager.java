@@ -5,157 +5,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 
-import be.goldocelot.lg.utils.ItemStackCreator;
+import be.goldocelot.role.playable.Role;
+import be.goldocelot.role.playable.SimpleVillageois;
 
 public class RoleManager {
-	
+
 	private RoleConfig rConfig;
 	
 	public RoleManager(RoleConfig rConfig) {
 		this.rConfig = rConfig;
 	}
 	
-	private Inventory createRoleGui() {
-		YamlConfiguration config = this.rConfig.getNewConfiguration();
-		if(config.getInt("Role.Simples Villageois") < 0) config.set("Role.Simples Villageois", 0);
-		if(config.getInt("Role.Loups-Garous") < 1) config.set("Role.Loups-Garous", 1);
-		Inventory roleGui = Bukkit.createInventory(null, 27, "§9 Menu des rôles");
-		for(int a=0 ; a<26 ; a++) {
-			roleGui.setItem(a, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
-		}
-		if(config.getBoolean("Role.Chasseur")) {
-			roleGui.setItem(4, new ItemStackCreator("Chasseur", 1, Material.STAINED_CLAY, (byte) 5).create());
-		}else {
-			roleGui.setItem(4, new ItemStackCreator("Chasseur", 1, Material.STAINED_CLAY, (byte) 14).create());
-		}
-		roleGui.setItem(10, new ItemStackCreator("Simples Villageois", config.getInt("Role.Simples Villageois"), Material.STAINED_CLAY, (byte) 0).create());
-		if(config.getBoolean("Role.Voyante")) {
-			roleGui.setItem(11, new ItemStackCreator("Voyante", 1, Material.STAINED_CLAY, (byte) 5).create());
-		}else {
-			roleGui.setItem(11, new ItemStackCreator("Voyante", 1, Material.STAINED_CLAY, (byte) 14).create());
-		}
-		if(config.getBoolean("Role.Sorcière")) {
-			roleGui.setItem(12, new ItemStackCreator("Sorcière", 1, Material.STAINED_CLAY, (byte) 5).create());
-		}else {
-			roleGui.setItem(12, new ItemStackCreator("Sorcière", 1, Material.STAINED_CLAY, (byte) 14).create());
-		}
-		if(config.getBoolean("Role.Petite fille")) {
-			roleGui.setItem(13, new ItemStackCreator("Petite fille", 1, Material.STAINED_CLAY, (byte) 5).create());
-		}else {
-			roleGui.setItem(13, new ItemStackCreator("Petite fille", 1, Material.STAINED_CLAY, (byte) 14).create());
-		}
-		if(config.getBoolean("Role.Cupidon")) {
-			roleGui.setItem(14, new ItemStackCreator("Cupidon", 1, Material.STAINED_CLAY, (byte) 5).create());
-		}else {
-			roleGui.setItem(14, new ItemStackCreator("Cupidon", 1, Material.STAINED_CLAY, (byte) 14).create());
-		}
-		if(config.getBoolean("Role.Voleur")) {
-			roleGui.setItem(15, new ItemStackCreator("Voleur", 1, Material.STAINED_CLAY, (byte) 5).create());
-		}else {
-			roleGui.setItem(15, new ItemStackCreator("Voleur", 1, Material.STAINED_CLAY, (byte) 14).create());
-		}
-		roleGui.setItem(16, new ItemStackCreator("Loups-Garous", config.getInt("Role.Loups-Garous"), Material.STAINED_CLAY, (byte) 12).create());
-		if(config.getBoolean("Role.Voleur")) {
-			int a = 1;
-			if(config.getBoolean("Role.Voyante")) a++;
-			if(config.getBoolean("Role.Chasseur")) a++;
-			if(config.getBoolean("Role.Sorcière")) a++;
-			if(config.getBoolean("Role.Petite fille")) a++;
-			if(config.getBoolean("Role.Cupidon")) a++;
-			a = a+config.getInt("Role.Loups-Garous");
-			a = a+config.getInt("Role.Simples Villageois");
-			if(a==Bukkit.getOnlinePlayers().size()+2) {
-				roleGui.setItem(25, new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create());
-			}else {
-				int b = Bukkit.getOnlinePlayers().size()+2;
-				roleGui.setItem(25, new ItemStackCreator("Nombre de rôles requis: "+b, b, Material.STONE, (byte) 0).create());
-			}
-		}else {
-			int a = 0;
-			if(config.getBoolean("Role.Voyante")) a++;
-			if(config.getBoolean("Role.Sorcière")) a++;
-			if(config.getBoolean("Role.Chasseur")) a++;
-			if(config.getBoolean("Role.Petite fille")) a++;
-			if(config.getBoolean("Role.Cupidon")) a++;
-			a = a+config.getInt("Role.Loups-Garous");
-			a = a+config.getInt("Role.Simples Villageois");
-			if(a==Bukkit.getOnlinePlayers().size()) {
-				roleGui.setItem(25, new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create());
-			}else {
-				int b = Bukkit.getOnlinePlayers().size();
-				roleGui.setItem(25, new ItemStackCreator("Nombre de rôles requis: "+b, b, Material.STONE, (byte) 0).create());
-			}
-		}
-		roleGui.setItem(26, new ItemStackCreator("Annuler", 1, Material.REDSTONE_BLOCK, (byte) 0).create());
-		try {
-			config.save(rConfig.getFile());
-		} catch (IOException io) {
-		 	io.printStackTrace();
-		}
-		return roleGui;	
+	public RoleEnum getRole(Player p) {
+		YamlConfiguration config = rConfig.getNewConfiguration();
+		if(config.getString("Player"+p.getName()).equals("Voleur")) return RoleEnum.VOLEUR;
+		else if(config.getString("Player"+p.getName()).equals("Loup-Garou")) return RoleEnum.LOUP_GAROU;
+		else if(config.getString("Player"+p.getName()).equals("Simple Villageois")) return RoleEnum.SIMPLE_VILLAGEOIS;
+		else if(config.getString("Player"+p.getName()).equals("Chasseur")) return RoleEnum.CHASSEUR;
+		else if(config.getString("Player"+p.getName()).equals("Sorcière")) return RoleEnum.SORCIÈRE;
+		else if(config.getString("Player"+p.getName()).equals("Cupidon")) return RoleEnum.CUPIDON;
+		else if(config.getString("Player"+p.getName()).equals("Petite fille")) return RoleEnum.PETITE_FILLE;
+		else if(config.getString("Player"+p.getName()).equals("Voyante")) return RoleEnum.VOYANTE;
+		else return null;
 	}
 	
-	private Inventory createSVGui() {
-		YamlConfiguration config = this.rConfig.getNewConfiguration();
-		Inventory svGui = Bukkit.createInventory(null, 27, "§9 Menu des simples villageois");
-		for(int a=0 ; a<26 ; a++) {
-			svGui.setItem(a, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
-		}
-		svGui.setItem(10, new ItemStackCreator("-3", 3, Material.STAINED_CLAY, (byte) 14).create());
-		svGui.setItem(11, new ItemStackCreator("-2", 2, Material.STAINED_CLAY, (byte) 14).create());
-		svGui.setItem(12, new ItemStackCreator("-1", 1, Material.STAINED_CLAY, (byte) 14).create());
-		svGui.setItem(13, new ItemStackCreator("Nombre de simples villageois", config.getInt("Role.Simples Villageois"), Material.STAINED_CLAY, (byte) 0).create());
-		svGui.setItem(14, new ItemStackCreator("1", 1, Material.STAINED_CLAY, (byte) 5).create());
-		svGui.setItem(15, new ItemStackCreator("2", 2, Material.STAINED_CLAY, (byte) 5).create());
-		svGui.setItem(16, new ItemStackCreator("3", 3, Material.STAINED_CLAY, (byte) 5).create());
-		if(config.getInt("Role.Simples Villageois")>=0) {
-			svGui.setItem(26, new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create());
-		}else {
-			svGui.setItem(26, new ItemStackCreator("Le nombre de simples villageois doit être supérieur ou égal à 0", 1, Material.STONE, (byte) 0).create());
-		}
-		return svGui;
-	}
-	
-	private Inventory createLGGUI() {
-		YamlConfiguration config = this.rConfig.getNewConfiguration();
-		Inventory lgGui = Bukkit.createInventory(null, 27, "§9 Menu des loups-garous");
-		for(int a=0 ; a<26 ; a++) {
-			lgGui.setItem(a, new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create());
-		}
-		lgGui.setItem(10, new ItemStackCreator("-3", 3, Material.STAINED_CLAY, (byte) 14).create());
-		lgGui.setItem(11, new ItemStackCreator("-2", 2, Material.STAINED_CLAY, (byte) 14).create());
-		lgGui.setItem(12, new ItemStackCreator("-1", 1, Material.STAINED_CLAY, (byte) 14).create());
-		lgGui.setItem(13, new ItemStackCreator("Nombre de loups-garous", config.getInt("Role.Loups-Garous"), Material.STAINED_CLAY, (byte) 12).create());
-		lgGui.setItem(14, new ItemStackCreator("1", 1, Material.STAINED_CLAY, (byte) 5).create());
-		lgGui.setItem(15, new ItemStackCreator("2", 2, Material.STAINED_CLAY, (byte) 5).create());
-		lgGui.setItem(16, new ItemStackCreator("3", 3, Material.STAINED_CLAY, (byte) 5).create());
-		if(config.getInt("Role.Loups-Garous")>=1) {
-			lgGui.setItem(26, new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create());
-		}else {
-			lgGui.setItem(26, new ItemStackCreator("Le nombre de loups-garous doit être supérieur ou égal à 1", 1, Material.STONE, (byte) 0).create());
-		}
-		return lgGui;
-	}
-	
-	public void sendRoleGui(Player p) {
-		p.openInventory(this.createRoleGui());
-	}
-	
-	public void sendSVGui(Player p) {
-		p.openInventory(this.createSVGui());
-	}
-	
-	public void sendLGGUI(Player p) {
-		p.openInventory(this.createLGGUI());
+	public boolean isRole(Player p, RoleEnum role) {
+		return role.equals(this.getRole(p));
 	}
 	
 	public void randomiser() {
-		YamlConfiguration config = this.rConfig.getNewConfiguration();
+		YamlConfiguration config = rConfig.getNewConfiguration();
 		List<String> rRole = new ArrayList<String>();
 		if(config.getBoolean("Role.Sorcière")) rRole.add("Sorcière");
 		if(config.getBoolean("Role.Voyante")) rRole.add("Voyante");
@@ -195,4 +77,13 @@ public class RoleManager {
 			}
 		}
 	}
+	
+	public void initialiser() {
+		YamlConfiguration config = rConfig.getNewConfiguration();
+		if(config.getInt("Role.Simples Villageois") != 0) {
+			Role SimpleVillageois = new SimpleVillageois(this.rConfig);
+			SimpleVillageois.setupPlayer();
+		}
+	}
+	
 }

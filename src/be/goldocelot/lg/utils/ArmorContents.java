@@ -1,6 +1,7 @@
 package be.goldocelot.lg.utils;
 
-import org.bukkit.Material;
+
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class ArmorContents {
@@ -11,24 +12,91 @@ public class ArmorContents {
 		this.item = item;
 	}
 	
-	public boolean isHelmet() {
-		return this.item.getType().equals(Material.LEATHER_HELMET);
-	}
-	
-	public boolean isChestplate() {
-		return this.item.getType().equals(Material.LEATHER_CHESTPLATE);
-	}
-	
-	public boolean isLeggings() {
-		return this.item.getType().equals(Material.LEATHER_LEGGINGS);
-	}
-	
-	public boolean isBoots() {
-		return this.item.getType().equals(Material.LEATHER_BOOTS);
-	}
-	
-	public boolean isItem() {
-		return !this.item.getType().equals(Material.LEATHER_HELMET) && !this.item.getType().equals(Material.LEATHER_CHESTPLATE)
-				&& !this.item.getType().equals(Material.LEATHER_LEGGINGS) && !this.item.getType().equals(Material.LEATHER_BOOTS);
+	public void equip(Player p) {
+		switch(item.getType()) {
+		case CHAINMAIL_BOOTS:{
+			p.getEquipment().setBoots(this.item);
+		}
+			break;
+		case CHAINMAIL_CHESTPLATE:{
+			p.getEquipment().setChestplate(this.item);
+		}
+			break;
+		case CHAINMAIL_HELMET:{
+			p.getEquipment().setHelmet(this.item);
+		}
+			break;
+		case CHAINMAIL_LEGGINGS:{
+			p.getEquipment().setLeggings(this.item);
+		}
+			break;
+		case DIAMOND_BOOTS:{
+			p.getEquipment().setBoots(this.item);
+		}
+			break;
+		case DIAMOND_CHESTPLATE:{
+			p.getEquipment().setChestplate(this.item);
+		}
+			break;
+		case DIAMOND_HELMET:{
+			p.getEquipment().setHelmet(this.item);
+		}
+			break;
+		case DIAMOND_LEGGINGS:{
+			p.getEquipment().setLeggings(this.item);
+		}
+			break;
+		case GOLD_BOOTS:{
+			p.getEquipment().setBoots(this.item);
+		}
+			break;
+		case GOLD_CHESTPLATE:{
+			p.getEquipment().setChestplate(this.item);
+		}
+			break;
+		case GOLD_HELMET:{
+			p.getEquipment().setHelmet(this.item);
+		}
+			break;
+		case GOLD_LEGGINGS:{
+			p.getEquipment().setLeggings(this.item);
+		}
+			break;
+		case IRON_BOOTS:{
+			p.getEquipment().setBoots(this.item);
+		}
+			break;
+		case IRON_CHESTPLATE:
+			break;
+		case IRON_HELMET:{
+			p.getEquipment().setHelmet(this.item);
+		}
+			break;
+		case IRON_LEGGINGS:{
+			p.getEquipment().setLeggings(this.item);
+		}
+			break;
+		case LEATHER_BOOTS:{
+			p.getEquipment().setBoots(this.item);
+		}
+			break;
+		case LEATHER_CHESTPLATE:{
+			p.getEquipment().setChestplate(this.item);
+		}
+			break;
+		case LEATHER_HELMET:{
+			p.getEquipment().setHelmet(this.item);
+		}
+			break;
+		case LEATHER_LEGGINGS:{
+			p.getEquipment().setLeggings(this.item);
+		}
+			break;
+		default:{
+			p.getInventory().addItem(this.item);
+		}
+			break;
+		
+		}
 	}
 }

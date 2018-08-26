@@ -18,10 +18,12 @@ import be.goldocelot.lg.utils.ItemStackCreator;
 public class RoleGuiEvent implements Listener {
 
 	private RoleConfig rConfig;
+	private RoleGuiManager rGManager;
 	private RoleManager rManager;
 	
-	public RoleGuiEvent(RoleConfig rConfig, RoleManager rManager) {
+	public RoleGuiEvent(RoleConfig rConfig, RoleGuiManager rGManager, RoleManager rManager) {
 		this.rConfig = rConfig;
+		this.rGManager = rGManager;
 		this.rManager = rManager;
 	}
 	
@@ -63,17 +65,18 @@ public class RoleGuiEvent implements Listener {
 			}else if(item.equals(new ItemStackCreator("Simples Villageois", config.getInt("Role.Simples Villageois"), Material.STAINED_CLAY, (byte) 0).create())) {
 				e.setCancelled(true);
 				p.closeInventory();
-				rManager.sendSVGui(p);
+				rGManager.sendSVGui(p);
 				return;
 			}else if(item.equals(new ItemStackCreator("Loups-Garous", config.getInt("Role.Loups-Garous"), Material.STAINED_CLAY, (byte) 12).create())) {
 				e.setCancelled(true);
 				p.closeInventory();
-				rManager.sendLGGUI(p);
+				rGManager.sendLGGUI(p);
 				return;
 			}else if(item.equals(new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create())){
 				e.setCancelled(true);
 				p.closeInventory();
 				rManager.randomiser();
+				rManager.initialiser();
 				return;
 			}else if(item.getType().equals(Material.STONE)) {
 				e.setCancelled(true);
@@ -90,7 +93,7 @@ public class RoleGuiEvent implements Listener {
 			} catch (IOException io) {
 			 	io.printStackTrace();
 			}
-			rManager.sendRoleGui(p);
+			rGManager.sendRoleGui(p);
 		}else if(i.getName().equals("§9 Menu des simples villageois")) {
 			if(item.equals(new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create())) {
 				e.setCancelled(true);
@@ -116,7 +119,7 @@ public class RoleGuiEvent implements Listener {
 			}else if(item.equals(new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create())) {
 				e.setCancelled(true);
 				p.closeInventory();
-				rManager.sendRoleGui(p);
+				rGManager.sendRoleGui(p);
 				return;
 			}
 			e.setCancelled(true);
@@ -126,7 +129,7 @@ public class RoleGuiEvent implements Listener {
 			} catch (IOException io) {
 			 	io.printStackTrace();
 			}
-			rManager.sendSVGui(p);
+			rGManager.sendSVGui(p);
 		}else if(i.getName().equals("§9 Menu des loups-garous")) {
 			if(item.equals(new ItemStackCreator("", 1, Material.LEAVES, (byte) 0).create())) {
 				e.setCancelled(true);
@@ -152,7 +155,7 @@ public class RoleGuiEvent implements Listener {
 			}else if(item.equals(new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create())) {
 				e.setCancelled(true);
 				p.closeInventory();
-				rManager.sendRoleGui(p);
+				rGManager.sendRoleGui(p);
 				return;
 			}
 			e.setCancelled(true);
@@ -162,7 +165,7 @@ public class RoleGuiEvent implements Listener {
 			} catch (IOException io) {
 			 	io.printStackTrace();
 			}
-			rManager.sendLGGUI(p);
+			rGManager.sendLGGUI(p);
 		}
 	}
 	

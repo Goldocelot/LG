@@ -6,13 +6,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import be.goldocelot.lg.role.RoleCmd;
 import be.goldocelot.lg.role.RoleConfig;
 import be.goldocelot.lg.role.RoleGuiEvent;
+import be.goldocelot.lg.role.RoleGuiManager;
 import be.goldocelot.lg.role.RoleManager;
 
 
 public class Main extends JavaPlugin{
 
 	private RoleConfig rConfig;
-	private RoleManager rManager;
+	private RoleGuiManager rGManager;
+	private RoleManager rMan;
 	
 	@Override
 	public void onEnable() {
@@ -22,10 +24,11 @@ public class Main extends JavaPlugin{
 		this.rConfig.initFile();
 		this.rConfig.initConfig();
 		
-		this.rManager = new RoleManager(rConfig);
+		this.rGManager = new RoleGuiManager(rConfig);
+		this.rMan = new RoleManager(rConfig);
 		
-		Bukkit.getPluginManager().registerEvents(new RoleGuiEvent(rConfig, rManager), this);
-		getCommand("composition").setExecutor(new RoleCmd(rManager));;
+		Bukkit.getPluginManager().registerEvents(new RoleGuiEvent(rConfig, rGManager, rMan), this);
+		getCommand("composition").setExecutor(new RoleCmd(rGManager));;
 		
 	}
 	
