@@ -1,4 +1,4 @@
-package be.goldocelot.role.playable;
+package be.goldocelot.lg.role.playable;
 
 import java.util.List;
 

@@ -33,6 +33,14 @@ public class RoleConfig {
 		}
 	}
 	
+	public void deleteFile() {
+		this.file = new File(this.main.getDataFolder(), "role.yml");
+		
+		if(this.file.exists()) {
+			this.file.delete();
+		}
+	}
+	
 	public File getFile() {
 		return this.file;
 	}

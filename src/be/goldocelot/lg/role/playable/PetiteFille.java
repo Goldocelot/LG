@@ -1,4 +1,4 @@
-package be.goldocelot.role.playable;
+package be.goldocelot.lg.role.playable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +14,17 @@ import org.bukkit.potion.PotionEffect;
 import be.goldocelot.lg.role.RoleConfig;
 import be.goldocelot.lg.utils.ItemStackCreator;
 
-public class SimpleVillageois extends Role {
-
+public class PetiteFille extends Role{
+	
 	private RoleConfig rConfig;
 	
-	public SimpleVillageois(RoleConfig rConfig) {
+	public PetiteFille(RoleConfig rConfig) {
 		this.rConfig = rConfig;
 	}
-	
+
 	@Override
 	public double MaxHealth() {
-		return 20;
+		return 20d;
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class SimpleVillageois extends Role {
 		YamlConfiguration config = rConfig.getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
-			if(config.getString("Player."+name).equals("Simple Villageois")) {
+			if(config.getString("Player."+name).equals("Petite fille")) {
 				p.add(Bukkit.getPlayer(name));
 			}
 		}
@@ -55,7 +55,7 @@ public class SimpleVillageois extends Role {
 		b.addEnchantment(Enchantment.DURABILITY, 3);
 		e.add(b);
 		ItemStack s = new ItemStackCreator(null, 1, Material.WOOD_SWORD, (byte) 0).create();
-		s.addEnchantment(Enchantment.DURABILITY, 3);
+		s.addEnchantment(Enchantment.KNOCKBACK, 1);
 		e.add(s);
 		ItemStack f = new ItemStackCreator(null, 64, Material.COOKED_FISH, (byte) 0).create();
 		e.add(f);

@@ -8,8 +8,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import be.goldocelot.role.playable.Role;
-import be.goldocelot.role.playable.SimpleVillageois;
+import be.goldocelot.lg.role.playable.Chasseur;
+import be.goldocelot.lg.role.playable.Cupidon;
+import be.goldocelot.lg.role.playable.LoupGarou;
+import be.goldocelot.lg.role.playable.PetiteFille;
+import be.goldocelot.lg.role.playable.Role;
+import be.goldocelot.lg.role.playable.SimpleVillageois;
+import be.goldocelot.lg.role.playable.Sorcière;
+import be.goldocelot.lg.role.playable.Voleur;
+import be.goldocelot.lg.role.playable.Voyante;
 
 public class RoleManager {
 
@@ -80,9 +87,35 @@ public class RoleManager {
 	
 	public void initialiser() {
 		YamlConfiguration config = rConfig.getNewConfiguration();
+		Role LoupGarou = new LoupGarou(this.rConfig);
+		LoupGarou.setupPlayer();
 		if(config.getInt("Role.Simples Villageois") != 0) {
 			Role SimpleVillageois = new SimpleVillageois(this.rConfig);
 			SimpleVillageois.setupPlayer();
+		}
+		if(config.getBoolean("Role.Sorcière")) {
+			Role Sorcière = new Sorcière(this.rConfig);
+			Sorcière.setupPlayer();
+		}
+		if(config.getBoolean("Role.Cupidon")) {
+			Role Cupidon = new Cupidon(this.rConfig);
+			Cupidon.setupPlayer();
+		}
+		if(config.getBoolean("Role.Voyante")) {
+			Role Voyante = new Voyante(this.rConfig);
+			Voyante.setupPlayer();
+		}
+		if(config.getBoolean("Role.Voleur")) {
+			Role Voleur = new Voleur(this.rConfig);
+			Voleur.setupPlayer();
+		}
+		if(config.getBoolean("Role.Chasseur")) {
+			Role Chasseur = new Chasseur(this.rConfig);
+			Chasseur.setupPlayer();
+		}
+		if(config.getBoolean("Role.Petite fille")) {
+			Role PetiteFille = new PetiteFille(this.rConfig);
+			PetiteFille.setupPlayer();
 		}
 	}
 	
