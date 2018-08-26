@@ -12,7 +12,6 @@ import be.goldocelot.lg.role.playable.Chasseur;
 import be.goldocelot.lg.role.playable.Cupidon;
 import be.goldocelot.lg.role.playable.LoupGarou;
 import be.goldocelot.lg.role.playable.PetiteFille;
-import be.goldocelot.lg.role.playable.Role;
 import be.goldocelot.lg.role.playable.SimpleVillageois;
 import be.goldocelot.lg.role.playable.Sorcière;
 import be.goldocelot.lg.role.playable.Voleur;
