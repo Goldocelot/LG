@@ -16,6 +16,11 @@ import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.role.RoleConfig;
 import be.goldocelot.lg.utils.ItemStackCreator;
 
+/**
+ * 
+ * @author Nicolas Gerard (Goldocelot)
+ * Class qui représente le role de voyante
+ */
 public class Voyante extends Role{
 
 	private RoleConfig rConfig;
@@ -24,11 +29,13 @@ public class Voyante extends Role{
 		this.rConfig = rConfig;
 	}
 	
+	// Montant de vie initial de la voyante
 	@Override
 	public double MaxHealth() {
 		return 20d;
 	}
 
+	// Joueur possédant le rôle de voyante
 	@Override
 	public List<Player> players() {
 		YamlConfiguration config = rConfig.getNewConfiguration();
@@ -41,6 +48,7 @@ public class Voyante extends Role{
 		return p;
 	}
 
+	// Equipement de départ de la voyante
 	@Override
 	public List<ItemStack> equipement() {
 		List<ItemStack> e = new ArrayList<>();
@@ -64,6 +72,7 @@ public class Voyante extends Role{
 		return e;
 	}
 
+	// Effet de potion de la voyante
 	@Override
 	public List<PotionEffect> effect() {
 		List<PotionEffect> pe = new ArrayList<>();

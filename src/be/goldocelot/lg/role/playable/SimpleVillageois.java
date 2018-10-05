@@ -15,6 +15,11 @@ import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.role.RoleConfig;
 import be.goldocelot.lg.utils.ItemStackCreator;
 
+/**
+ * 
+ * @author Nicolas Gerard (Goldocelot)
+ * Class qui représente le role de simple villageois
+ */
 public class SimpleVillageois extends Role {
 
 	private RoleConfig rConfig;
@@ -23,11 +28,13 @@ public class SimpleVillageois extends Role {
 		this.rConfig = rConfig;
 	}
 	
+	// Montant de vie initial des simples villageois
 	@Override
 	public double MaxHealth() {
 		return 20d;
 	}
 
+	// Liste des joueurs possédant le rôle des simples villageois
 	@Override
 	public List<Player> players() {
 		YamlConfiguration config = rConfig.getNewConfiguration();
@@ -40,6 +47,7 @@ public class SimpleVillageois extends Role {
 		return p;
 	}
 
+	// Equipement de départ des simples villageois
 	@Override
 	public List<ItemStack> equipement() {
 		List<ItemStack> e = new ArrayList<>();
@@ -63,6 +71,7 @@ public class SimpleVillageois extends Role {
 		return e;
 	}
 
+	// Effet de potion des simples villageois
 	@Override
 	public List<PotionEffect> effect() {
 		List<PotionEffect> pe = new ArrayList<>();

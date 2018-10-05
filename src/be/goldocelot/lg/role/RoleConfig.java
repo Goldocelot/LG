@@ -8,6 +8,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import be.goldocelot.lg.Main;
 
+/**
+ * 
+ * @author Nicolas Gerard (Goldocelot)
+ * Class qui permet la bonne gestion du dossier de config du jeu
+ */
 public class RoleConfig {
 
 	private Main main;
@@ -17,10 +22,12 @@ public class RoleConfig {
 		this.main = main;
 	}
 	
+	// Méthode qui créé le dossier si celui-ci n'existe pas déja
 	public void initFolder() {
 		if(!this.main.getDataFolder().exists()) this.main.getDataFolder().mkdirs();
 	}
 	
+	//  Méthode qui crée le fichier si celui-ci n'existe pas
 	public void initFile() {
 		this.file = new File(this.main.getDataFolder(), "role.yml");
 		
@@ -33,6 +40,7 @@ public class RoleConfig {
 		}
 	}
 	
+	// Méthode qui supprime le fichié si celui-ci existe
 	public void deleteFile() {
 		this.file = new File(this.main.getDataFolder(), "role.yml");
 		
@@ -41,10 +49,12 @@ public class RoleConfig {
 		}
 	}
 	
+	// Méthode qui permet d'accéder au fichier
 	public File getFile() {
 		return this.file;
 	}
 	
+	// Méthode qui permet de chargé un fichier pour le modifier
 	public YamlConfiguration getNewConfiguration() {
 		YamlConfiguration config = new YamlConfiguration();
 		
@@ -56,6 +66,7 @@ public class RoleConfig {
 		return config;
 	}
 	
+	// Méthode qui écrit les configurations de base dans le fichier si des lignes on été supprimé ou si c'est le premier lancement
 	public void initConfig() {
 		YamlConfiguration config = this.getNewConfiguration();
 		if(!config.contains("Role.Simples Villageois")) config.set("Role.Simples Villageois", 0);

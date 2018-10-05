@@ -16,6 +16,11 @@ import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.role.RoleConfig;
 import be.goldocelot.lg.utils.ItemStackCreator;
 
+/**
+ * 
+ * @author Nicolas Gerard (Goldocelot)
+ * Class qui représente le role de cupidon
+ */
 public class Cupidon extends Role{
 
 	private RoleConfig rConfig;
@@ -24,11 +29,13 @@ public class Cupidon extends Role{
 		this.rConfig = rConfig;
 	}
 	
+	// Montant de vie initial du cupidon
 	@Override
 	public double MaxHealth() {
 		return 20;
 	}
 
+	// Joueur possédant le rôle de cupidon
 	@Override
 	public List<Player> players() {
 		YamlConfiguration config = rConfig.getNewConfiguration();
@@ -41,6 +48,7 @@ public class Cupidon extends Role{
 		return p;	
 	}
 
+	// Equipement de départ du cupidon
 	@Override
 	public List<ItemStack> equipement() {
 		List<ItemStack> e = new ArrayList<>();
@@ -64,6 +72,7 @@ public class Cupidon extends Role{
 		return e;
 	}
 
+	// Effet de potion du cupidon
 	@Override
 	public List<PotionEffect> effect() {
 		List<PotionEffect> pe = new ArrayList<>();
