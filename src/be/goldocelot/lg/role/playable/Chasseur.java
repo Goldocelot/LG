@@ -81,4 +81,15 @@ public class Chasseur extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aChasseur§r\" vous devez gagner avec le §avillage§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aChasseur§r\" vous disposez d'un pouvoir §eactif§r et de deux pouvoirs §9passif§r.");
+		rules.add("§8[§4LG§8]§r §eActif§r: Une fois dans la partie vous pouvez utilisez la commande \"§6/garde§r\" qui a pour effet d'enlever §c4 receptacles de coeur§r à un loup s'il essaie de vous mordre durant cette nuit.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez l'effet §5saturation§r et lors de votre §6mort§r vous pourrez choisir un joueur sur qui tirer afin de lui enlever §c5 receptacles de coeur§r.");
+		return rules;	
+	}
+
 }

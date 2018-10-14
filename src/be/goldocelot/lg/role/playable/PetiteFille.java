@@ -78,4 +78,14 @@ public class PetiteFille extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aPetite-Fille§r\" vous devez gagner avec le §avillage§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aPetite-Fille§r\" vous disposez de deux pouvoirs §9passif§r.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez une §5épée recule 1§r et chaque §6matin§r votre ourson en peluche vous chuchotera des choses qui se sont passé la nuit précédente§r.");
+		return rules;	
+	}
+
 }

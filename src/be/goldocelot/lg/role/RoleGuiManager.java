@@ -109,7 +109,7 @@ public class RoleGuiManager {
 			a = a+config.getInt("Role.Loups-Garous");
 			a = a+config.getInt("Role.Simples Villageois");
 			// Si le nombre de rôle activé est égal au nombre de joueur
-			if(a==Bukkit.getOnlinePlayers().size()+2) {
+			if(a==Bukkit.getOnlinePlayers().size()) {
 				// On active le bouton valider
 				roleGui.setItem(25, new ItemStackCreator("Valider", 1, Material.EMERALD_BLOCK, (byte) 0).create());
 			}else {

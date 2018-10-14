@@ -81,4 +81,16 @@ public class Cupidon extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aCupidon§r\" vous devez gagner avec le §avillage§r  ou les §damoureux§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec les §damoureux§r vous devez éliminer tout le monde sauf ceux-ci et vous-même.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aCupidon§r\" vous disposez d'un pouvoir §eactif§r et d'un pouvoir §9passif§r.");
+		rules.add("§8[§4LG§8]§r §eActif§r: Au début de la partie vous devez utilisez la commande \"§6/amour [Joueur] [Joueur]§r\" pour choisir vos §damoureux§r ceux-ci seront lié par l'amour et mourront ensembe.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez l'effet §5absorption§r.");
+		return rules;
+	}
+
 }

@@ -81,4 +81,15 @@ public class Sorcière extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aSorcière§r\" vous devez gagner avec le §avillage§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aSorcière§r\" vous disposez de deux pouvoirs §eactif§r et d'un pouvoir §9passif§r.");
+		rules.add("§8[§4LG§8]§r §eActif§r: §6Une fois§r dans la partie vous pouvez utilisez la commande \"§6/vie§r\" qui a pour effet de résuciter le dernier joueur mort, vous pouvez aussis utiliser §6une fois§r  la commande \"§6/mort [Joueur]§r\" qui a pour effet d'enlever §c4 receptacles de coeur§r au joueur visé.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez l'effet §5régénération§r.");
+		return rules;	
+	}
+
 }

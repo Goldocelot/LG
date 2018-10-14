@@ -81,4 +81,15 @@ public class Voyante extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aVoyante§r\" vous devez gagner avec le §avillage§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aVoyante§r\" vous disposez d'un pouvoir §eactif§r et d'un pouvoir §9passif§r.");
+		rules.add("§8[§4LG§8]§r §eActif§r: Chaque §6nuit§r vous pouvez utilisez la commande \"§6/voir [Joueur]§r\" pour voir le rôle du joueur visé.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez l'effet §5vision nocturne§r.");
+		return rules;	
+	}
+
 }

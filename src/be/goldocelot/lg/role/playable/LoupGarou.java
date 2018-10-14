@@ -78,4 +78,25 @@ public class LoupGarou extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§4Loup-Garou§r\" vous devez gagner avec les §4loups§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec les §4loups§r vous devez éliminer toute le monde sauf ceux-ci.");
+		String lg = "";
+		for(Player plg : players()) {
+			if(lg.equals("")) {
+				lg = plg.getName();
+			}else {
+				lg = lg+", "+plg.getName();
+			}
+		}
+		rules.add("§8[§4LG§8]§r Voici la liste des §4loups§r: "+lg+".");
+		rules.add("§8[§4LG§8]§r Vous pouvez utiliser la commande \"§6/loups§r\" pour revoir la liste des §4loups§r.");
+		rules.add("§8[§4LG§8]§r En tant que \"§4Loup-Garou§r\" vous disposez d'un pouvoir §eactif§r et d'un pouvoir §9passif§r.");
+		rules.add("§8[§4LG§8]§r §eActif§r: Chaque §6nuit§r vous pouvez faire un §6clique droit§r avec votre épée pour enlever §c3 receptacles de coeur§r à un joueur.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez une §5épée tranchant 1§r.");
+		return rules;
+	}
+
 }

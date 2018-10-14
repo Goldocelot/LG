@@ -78,4 +78,14 @@ public class SimpleVillageois extends Role {
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aSimple Villageois§r\" vous devez gagner avec le §avillage§r.");
+		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aSimple Villageois§§r\" vous disposez d'un pouvoir §9passif§r.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez un §5plastron protection 1§r.");
+		return rules;	
+	}
+
 }

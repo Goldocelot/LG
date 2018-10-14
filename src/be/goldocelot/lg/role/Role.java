@@ -2,6 +2,7 @@ package be.goldocelot.lg.role;
 
 import java.util.List;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -19,11 +20,14 @@ public abstract class Role{
 	public abstract List<Player> players();
 	public abstract List<ItemStack> equipement();
 	public abstract List<PotionEffect> effect();
+	public abstract List<String> rules();
 	
 	// Méthode qui permet d'initialiser les inventaires, ... des joueurs d'un role
 	public void setupPlayer() {
 		for(Player p : this.players()) {
-			p.setMaxHealth(MaxHealth());
+			p.getInventory().clear();
+			p.setFoodLevel(20);
+			p.setMaxHealth(MaxHealth());		
 			for(ItemStack item : equipement()){
 				new ArmorContents(item).equip(p);
 			}
@@ -33,6 +37,26 @@ public abstract class Role{
 			for(PotionEffect pot : effect()) {
 				p.addPotionEffect(pot);
 			}
+			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 30, 30);
+			for(String rule : rules()) {
+				p.sendMessage(rule);
+			}
+		}
+	}
+	
+	public void setupPlayer(Player p) {
+		p.getInventory().clear();
+		p.setFoodLevel(20);
+		p.setMaxHealth(MaxHealth());		
+		for(ItemStack item : equipement()){
+			new ArmorContents(item).equip(p);
+		}
+		for(PotionEffect pot : effect()) {
+			p.addPotionEffect(pot);
+		}
+		p.playSound(p.getLocation(), Sound.ORB_PICKUP, 30, 30);
+		for(String rule : rules()) {
+			p.sendMessage(rule);
 		}
 	}
 }

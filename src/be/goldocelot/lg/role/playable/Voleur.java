@@ -81,4 +81,22 @@ public class Voleur extends Role{
 		return pe;
 	}
 
+	@Override
+	public List<String> rules() {
+		List<String> rules = new ArrayList<>();
+		rules.add("§8[§4LG§8]§r Vous êtes \"§7Voleur§r\" vous avez l'effet §5vitesse§r.");
+		String voleur = "";
+		YamlConfiguration config = rConfig.getNewConfiguration();
+		for(String roleVoler : config.getConfigurationSection("Voleur").getKeys(false)) {
+			if(voleur.equals("")) {
+				voleur = config.getString("Voleur."+roleVoler);
+			}else {
+				voleur = voleur+", "+config.getString("Voleur."+roleVoler);;
+			}
+		}
+		rules.add("§8[§4LG§8]§r Voici les rôles que vous pouvez incarner: "+voleur+".");
+		rules.add("§8[§4LG§8]§r Vous devez utiliser la commande \"§6/voleur [Role]\"§r pour choisir celui que vous voulez incarner.");
+		return rules;
+	}
+
 }
