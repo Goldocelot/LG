@@ -21,11 +21,9 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  * Class qui représente le role de loup-garou
  */
 public class LoupGarou extends Role{
-
-	private RoleConfig rConfig;
 	
 	public LoupGarou(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 	
 	// Montant de vie initial des loups-garous
@@ -37,7 +35,7 @@ public class LoupGarou extends Role{
 	// Liste des joueurs possédant le rôle de loup-garou
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Loup-Garou")) {

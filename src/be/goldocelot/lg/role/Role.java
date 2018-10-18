@@ -21,6 +21,11 @@ public abstract class Role{
 	public abstract List<ItemStack> equipement();
 	public abstract List<PotionEffect> effect();
 	public abstract List<String> rules();
+	private RoleConfig rConfig;
+	
+	public Role(RoleConfig rConfig) {
+		this.rConfig = rConfig;
+	}
 	
 	// Méthode qui permet d'initialiser les inventaires, ... des joueurs d'un role
 	public void setupPlayer() {
@@ -59,4 +64,9 @@ public abstract class Role{
 			p.sendMessage(rule);
 		}
 	}
+	
+	public RoleConfig getrConfig() {
+		return rConfig;
+	}
+
 }

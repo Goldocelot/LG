@@ -22,10 +22,8 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  */
 public class PetiteFille extends Role{
 	
-	private RoleConfig rConfig;
-	
 	public PetiteFille(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 
 	// Montant de vie initial de la petite fille
@@ -37,7 +35,7 @@ public class PetiteFille extends Role{
 	// Joueur possédant le rôle de petite fille
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Petite fille")) {

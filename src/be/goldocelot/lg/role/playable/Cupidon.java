@@ -22,11 +22,9 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  * Class qui représente le role de cupidon
  */
 public class Cupidon extends Role{
-
-	private RoleConfig rConfig;
 	
 	public Cupidon(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 	
 	// Montant de vie initial du cupidon
@@ -38,7 +36,7 @@ public class Cupidon extends Role{
 	// Joueur possédant le rôle de cupidon
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Cupidon")) {

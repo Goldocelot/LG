@@ -23,10 +23,8 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  */
 public class Chasseur extends Role{
 	
-	private RoleConfig rConfig;
-
 	public Chasseur(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 	
 	// Montant de vie initial du chasseur
@@ -38,7 +36,7 @@ public class Chasseur extends Role{
 	// Joueur possédant le rôle de chasseur
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Chasseur")) {

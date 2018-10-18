@@ -22,11 +22,9 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  * Class qui représente le role de voleur
  */
 public class Voleur extends Role{
-
-	private RoleConfig rConfig;
 	
 	public Voleur(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 	
 	// Montant de vie initial du voleur
@@ -38,7 +36,7 @@ public class Voleur extends Role{
 	// Joueur possédant le rôle de voleur
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Voleur")) {
@@ -86,7 +84,7 @@ public class Voleur extends Role{
 		List<String> rules = new ArrayList<>();
 		rules.add("§8[§4LG§8]§r Vous êtes \"§7Voleur§r\" vous avez l'effet §5vitesse§r.");
 		String voleur = "";
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		for(String roleVoler : config.getConfigurationSection("Voleur").getKeys(false)) {
 			if(voleur.equals("")) {
 				voleur = config.getString("Voleur."+roleVoler);

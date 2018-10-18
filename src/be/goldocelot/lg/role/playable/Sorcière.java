@@ -22,11 +22,9 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  * Class qui représente le role de sorcière
  */
 public class Sorcière extends Role{
-
-	private RoleConfig rConfig;
 	
 	public Sorcière(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 	
 	// Montant de vie initial de la sorcière
@@ -38,7 +36,7 @@ public class Sorcière extends Role{
 	// Joueur possédant le rôle de sorcière
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Sorcière")) {

@@ -21,11 +21,9 @@ import be.goldocelot.lg.utils.ItemStackCreator;
  * Class qui représente le role de simple villageois
  */
 public class SimpleVillageois extends Role {
-
-	private RoleConfig rConfig;
 	
 	public SimpleVillageois(RoleConfig rConfig) {
-		this.rConfig = rConfig;
+		super(rConfig);
 	}
 	
 	// Montant de vie initial des simples villageois
@@ -37,7 +35,7 @@ public class SimpleVillageois extends Role {
 	// Liste des joueurs possédant le rôle des simples villageois
 	@Override
 	public List<Player> players() {
-		YamlConfiguration config = rConfig.getNewConfiguration();
+		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
 			if(config.getString("Player."+name).equals("Simple Villageois")) {
