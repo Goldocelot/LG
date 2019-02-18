@@ -1,7 +1,7 @@
 name: LG
 main: be.goldocelot.lg.Main
 author: _goldocelot_
-version: 0.1.5
+version: 0.1.6
 commands:
  composition:
   description: Cette commande ouvre le menu des roles.

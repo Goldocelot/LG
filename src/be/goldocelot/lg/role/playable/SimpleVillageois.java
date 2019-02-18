@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.role.RoleConfig;
+import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.utils.ItemStackCreator;
 
 /**

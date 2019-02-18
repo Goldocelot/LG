@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * 
  * @author Nicolas Gerard (Goldocelot), Glowstoner
- * Class utilitaire qui permet d'Ã©quiper plus facilement un item Ã  un joueur
+ * Class utilitaire qui permet d'équiper plus facilement un item à  un joueur
  */
 public class ArmorContents {
 	
@@ -16,7 +16,7 @@ public class ArmorContents {
 		this.item = item;
 	}
 	
-	/* MÃ©thode qui vÃ©rifie la nature d'un item (casque, plastron, jambiÃ¨re, botte ou item neutre) 
+	/* Méthode qui vérifie la nature d'un item (casque, plastron, jambière, botte ou item neutre) 
 	et qui le place dans le bon slot du joueur en fonction de celle-ci */
 	public void equip(Player p) {
 		String mn = this.item.getType().name();

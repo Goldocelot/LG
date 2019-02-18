@@ -1,4 +1,4 @@
-package be.goldocelot.lg.role.playable;
+package be.goldocelot.lg.role.playable.sorcière;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,41 +12,41 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.role.RoleConfig;
+import be.goldocelot.lg.role.Role;
 import be.goldocelot.lg.utils.ItemStackCreator;
 
 /**
  * 
  * @author Nicolas Gerard (Goldocelot)
- * Class qui représente le role de chasseur
+ * Class qui représente le role de sorcière
  */
-public class Chasseur extends Role{
+public class Sorcière extends Role{
 	
-	public Chasseur(RoleConfig rConfig) {
+	public Sorcière(RoleConfig rConfig) {
 		super(rConfig);
 	}
 	
-	// Montant de vie initial du chasseur
+	// Montant de vie initial de la sorcière
 	@Override
 	public double MaxHealth() {
-		return 20;
+		return 20d;
 	}
 
-	// Joueur possédant le rôle de chasseur
+	// Joueur possédant le rôle de sorcière
 	@Override
 	public List<Player> players() {
 		YamlConfiguration config = getrConfig().getNewConfiguration();
 		List<Player> p = new ArrayList<>();
 		for(String name : config.getConfigurationSection("Player").getKeys(false)) {
-			if(config.getString("Player."+name).equals("Chasseur")) {
+			if(config.getString("Player."+name).equals("Sorcière")) {
 				p.add(Bukkit.getPlayer(name));
 			}
 		}
 		return p;
 	}
 
-	// Equipement de départ du chasseur
+	// Equipement de départ de la sorcière
 	@Override
 	public List<ItemStack> equipement() {
 		List<ItemStack> e = new ArrayList<>();
@@ -70,11 +70,11 @@ public class Chasseur extends Role{
 		return e;
 	}
 
-	// Effet de potion du chasseur
+	// Effet de potion de la sorcière
 	@Override
 	public List<PotionEffect> effect() {
 		List<PotionEffect> pe = new ArrayList<>();
-		PotionEffect a = new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 0, false, false);
+		PotionEffect a = new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0, false, false);
 		pe.add(a);
 		return pe;
 	}
@@ -82,11 +82,11 @@ public class Chasseur extends Role{
 	@Override
 	public List<String> rules() {
 		List<String> rules = new ArrayList<>();
-		rules.add("§8[§4LG§8]§r Vous êtes \"§aChasseur§r\" vous devez gagner avec le §avillage§r.");
+		rules.add("§8[§4LG§8]§r Vous êtes \"§aSorcière§r\" vous devez gagner avec le §avillage§r.");
 		rules.add("§8[§4LG§8]§r Pour gagner avec le §avillage§r vous devez éliminer toute les menaces pour celui-ci.");
-		rules.add("§8[§4LG§8]§r En tant que \"§aChasseur§r\" vous disposez d'un pouvoir §eactif§r et de deux pouvoirs §9passif§r.");
-		rules.add("§8[§4LG§8]§r §eActif§r: Une fois dans la partie vous pouvez utilisez la commande \"§6/garde§r\" qui a pour effet d'enlever §c4 receptacles de coeur§r à un loup s'il essaie de vous mordre durant cette nuit.");
-		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez l'effet §5saturation§r et lors de votre §6mort§r vous pourrez choisir un joueur sur qui tirer afin de lui enlever §c5 receptacles de coeur§r.");
+		rules.add("§8[§4LG§8]§r En tant que \"§aSorcière§r\" vous disposez de deux pouvoirs §eactif§r et d'un pouvoir §9passif§r.");
+		rules.add("§8[§4LG§8]§r §eActif§r: §6Une fois§r dans la partie vous pouvez utilisez la commande \"§6/vie§r\" qui a pour effet de résuciter le dernier joueur mort, vous pouvez aussis utiliser §6une fois§r  la commande \"§6/mort [Joueur]§r\" qui a pour effet d'enlever §c4 receptacles de coeur§r au joueur visé.");
+		rules.add("§8[§4LG§8]§r §9Passif§r: Vous avez l'effet §5régénération§r.");
 		return rules;	
 	}
 

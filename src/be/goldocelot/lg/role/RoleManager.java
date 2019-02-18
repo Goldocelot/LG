@@ -8,14 +8,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import be.goldocelot.lg.role.playable.Chasseur;
+import be.goldocelot.lg.role.RoleConfig;
 import be.goldocelot.lg.role.playable.Cupidon;
 import be.goldocelot.lg.role.playable.LoupGarou;
 import be.goldocelot.lg.role.playable.PetiteFille;
 import be.goldocelot.lg.role.playable.SimpleVillageois;
-import be.goldocelot.lg.role.playable.Sorcière;
 import be.goldocelot.lg.role.playable.Voleur;
 import be.goldocelot.lg.role.playable.Voyante;
+import be.goldocelot.lg.role.playable.chasseur.Chasseur;
+import be.goldocelot.lg.role.playable.sorcière.Sorcière;
 
 /**
  * 
@@ -33,15 +34,54 @@ public class RoleManager {
 	// Méthode qui permet d'avoir le rôle d'un joueur
 	public RoleEnum getRole(Player p) {
 		YamlConfiguration config = rConfig.getNewConfiguration();
-		if(config.getString("Player"+p.getName()).equals("Voleur")) return RoleEnum.VOLEUR;
-		else if(config.getString("Player"+p.getName()).equals("Loup-Garou")) return RoleEnum.LOUP_GAROU;
-		else if(config.getString("Player"+p.getName()).equals("Simple Villageois")) return RoleEnum.SIMPLE_VILLAGEOIS;
-		else if(config.getString("Player"+p.getName()).equals("Chasseur")) return RoleEnum.CHASSEUR;
-		else if(config.getString("Player"+p.getName()).equals("Sorcière")) return RoleEnum.SORCIÈRE;
-		else if(config.getString("Player"+p.getName()).equals("Cupidon")) return RoleEnum.CUPIDON;
-		else if(config.getString("Player"+p.getName()).equals("Petite fille")) return RoleEnum.PETITE_FILLE;
-		else if(config.getString("Player"+p.getName()).equals("Voyante")) return RoleEnum.VOYANTE;
+		if(config.getString("Player."+p.getName()).equals("Voleur")) return RoleEnum.VOLEUR;
+		else if(config.getString("Player."+p.getName()).equals("Loup-Garou")) return RoleEnum.LOUP_GAROU;
+		else if(config.getString("Player."+p.getName()).equals("Simple Villageois")) return RoleEnum.SIMPLE_VILLAGEOIS;
+		else if(config.getString("Player."+p.getName()).equals("Chasseur")) return RoleEnum.CHASSEUR;
+		else if(config.getString("Player."+p.getName()).equals("Sorcière")) return RoleEnum.SORCIÈRE;
+		else if(config.getString("Player."+p.getName()).equals("Cupidon")) return RoleEnum.CUPIDON;
+		else if(config.getString("Player."+p.getName()).equals("Petite fille")) return RoleEnum.PETITE_FILLE;
+		else if(config.getString("Player."+p.getName()).equals("Voyante")) return RoleEnum.VOYANTE;
 		else return null;
+	}
+	
+	public Player getPlayer(RoleEnum rEnum) {
+		YamlConfiguration config = rConfig.getNewConfiguration();
+		String role = null;
+		switch (rEnum) {
+		case CHASSEUR:
+			role="Chasseur";
+			break;
+		case CUPIDON:
+			role="Cupidon";
+			break;
+		case LOUP_GAROU:
+			role="Loups-Garou";
+			break;
+		case PETITE_FILLE:
+			role="Petite fille";
+			break;		
+		case SIMPLE_VILLAGEOIS:
+			role="Simples Villageois";
+			break;
+		case SORCIÈRE:
+			role="Sorcière";
+			break;
+		case VOLEUR:
+			role="Voleur";
+			break;
+		case VOYANTE:
+			role="Voyante";
+			break;
+		default:
+			break;
+		}
+		for(Player inGame : Bukkit.getOnlinePlayers()) {
+			if(config.getString("Role."+inGame.getName()).equals(role)) {
+				return inGame;
+			}
+		}
+		return null;
 	}
 	
 	// Méthode qui permet de tester si un joueur posséde un rôle x
